@@ -1,0 +1,291 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AccountCreateEmailInput {
+  email: String!
+}
+
+input AccountUpdatePasswordInput {
+  currentPassword: String!
+  password: String!
+  verified: String!
+}
+
+input AccountUpdateProfileInput {
+  avatarUrl: String
+  bio: String
+  dob: DateTime
+  firstName: String
+  lastName: String
+  location: String
+  phone: String
+}
+
+input AdminCreateCompanyInput {
+  addressLine1: String!
+  addressLine2: String!
+  city: String!
+  country: String!
+  name: String!
+  phoneNumber: String!
+  postalCode: String!
+  stateOrProvince: String!
+}
+
+input AdminCreateProviderInput {
+  firstName: String
+  lastName: String
+  name: String!
+}
+
+input AdminCreateReporterInput {
+  addressCity: String
+  addressLine1: String
+  addressLine2: String
+  addressPostalCode: String
+  addressState: String
+  faxNumber: String
+  name: String!
+  phoneNumber: String
+  profession: String
+}
+
+input AdminCreateUserInput {
+  email: String!
+  firstName: String
+  lastName: String
+  role: Role!
+  username: String
+}
+
+input AdminListCompanyInput {
+  limit: Int = 10
+  name: String
+  skip: Int = 0
+}
+
+input AdminListProviderInput {
+  limit: Int = 10
+  name: String
+  skip: Int = 0
+}
+
+input AdminListReporterInput {
+  limit: Int = 10
+  name: String
+  skip: Int = 0
+}
+
+input AdminUpdateCompanyInput {
+  addressLine1: String
+  addressLine2: String
+  city: String
+  country: String
+  name: String
+  phoneNumber: String
+  postalCode: String
+  stateOrProvince: String
+}
+
+input AdminUpdateProviderInput {
+  firstName: String
+  lastName: String
+  name: String
+}
+
+input AdminUpdateReporterInput {
+  addressCity: String
+  addressLine1: String
+  addressLine2: String
+  addressPostalCode: String
+  addressState: String
+  faxNumber: String
+  name: String
+  phoneNumber: String
+  profession: String
+}
+
+input AdminUpdateUserInput {
+  avatarUrl: String
+  bio: String
+  firstName: String
+  lastName: String
+  location: String
+  phone: String
+  role: Role
+  username: String
+}
+
+type AuthToken {
+  """JWT Bearer token"""
+  token: String!
+}
+
+type Company {
+  addressLine1: String
+  addressLine2: String
+  city: String
+  country: String
+  createdAt: DateTime
+  id: String
+  name: String
+  phoneNumber: String
+  postalCode: String
+  stateOrProvince: String
+  updatedAt: DateTime
+}
+
+type CorePaging {
+  limit: Int
+  skip: Int
+  total: Int
+}
+
+input CorePagingInput {
+  limit: Int = 10
+  skip: Int = 0
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Email {
+  createdAt: DateTime
+  email: String
+  id: String
+  primary: Boolean
+  public: Boolean
+  updatedAt: DateTime
+  verified: Boolean
+}
+
+type IntercomMessage {
+  payload: JSON
+  scope: String
+  type: String
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  accountCreateEmail(input: AccountCreateEmailInput!): Email
+  accountDeleteEmail(emailId: String!): Email
+  accountMarkEmailPrimary(emailId: String!): Email
+  accountMarkEmailPrivate(emailId: String!): Email
+  accountMarkEmailPublic(emailId: String!): Email
+  accountResetPassword: Boolean
+  accountUpdatePassword(input: AccountUpdatePasswordInput!): Boolean
+  accountUpdateProfile(input: AccountUpdateProfileInput!): User
+  accountUpdateUsername(username: String!): User
+  adminCreateCompany(input: AdminCreateCompanyInput!): Company
+  adminCreateProvider(input: AdminCreateProviderInput!): Provider
+  adminCreateReporter(input: AdminCreateReporterInput!): Reporter
+  adminCreateUser(input: AdminCreateUserInput!): User
+  adminDeleteCompany(companyId: String!): Company
+  adminDeleteProvider(providerId: String!): Provider
+  adminDeleteReporter(reporterId: String!): Reporter
+  adminDeleteUser(userId: String!): User
+  adminSetUserPassword(password: String!, userId: String!): User
+  adminUpdateCompany(companyId: String!, input: AdminUpdateCompanyInput!): Company
+  adminUpdateProvider(input: AdminUpdateProviderInput!, providerId: String!): Provider
+  adminUpdateReporter(input: AdminUpdateReporterInput!, reporterId: String!): Reporter
+  adminUpdateUser(input: AdminUpdateUserInput!, userId: String!): User
+  intercomPub(payload: JSON, scope: String, type: String!): IntercomMessage
+  login(input: LoginInput!): AuthToken
+  logout: Boolean
+  register(input: RegisterInput!): AuthToken
+}
+
+type Provider {
+  createdAt: DateTime
+  firstName: String
+  id: String
+  lastName: String
+  name: String
+  updatedAt: DateTime
+}
+
+type Query {
+  accountEmails: [Email!]
+  accountProfile: User
+  accountUsernameAvailable(username: String!): Boolean
+  adminCompany(companyId: String!): Company
+  adminCompanys(input: AdminListCompanyInput): [Company!]
+  adminCountCompanys(input: AdminListCompanyInput): CorePaging
+  adminCountProviders(input: AdminListProviderInput): CorePaging
+  adminCountReporters(input: AdminListReporterInput): CorePaging
+  adminCountUsers(paging: CorePagingInput): CorePaging
+  adminProvider(providerId: String!): Provider
+  adminProviders(input: AdminListProviderInput): [Provider!]
+  adminReporter(reporterId: String!): Reporter
+  adminReporters(input: AdminListReporterInput): [Reporter!]
+  adminUser(userId: String!): User
+  adminUsers(paging: CorePagingInput): [User!]
+  me: User
+  publicCompanys: [Company!]
+  publicProviders: [Provider!]
+  publicReporters: [Reporter!]
+  uptime: Float
+}
+
+input RegisterInput {
+  avatarUrl: String
+  email: String!
+  firstName: String
+  lastName: String
+  password: String!
+  phone: String
+  username: String
+}
+
+type Reporter {
+  addressCity: String
+  addressLine1: String
+  addressLine2: String
+  addressPostalCode: String
+  addressState: String
+  createdAt: DateTime
+  faxNumber: String
+  id: String
+  name: String
+  phoneNumber: String
+  profession: String
+  updatedAt: DateTime
+}
+
+enum Role {
+  Admin
+  User
+}
+
+type Subscription {
+  intercomSub(scope: String, type: String): IntercomMessage
+}
+
+type User {
+  avatarUrl: String
+  bio: String
+  createdAt: DateTime
+  email: String
+  emails: [Email!]
+  firstName: String
+  id: String
+  lastName: String
+  location: String
+  name: String
+  phone: String
+  role: Role
+  updatedAt: DateTime
+  username: String
+}
