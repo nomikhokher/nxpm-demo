@@ -84,6 +84,9 @@ export class ApiAccountDataAccessService {
 
   async userEmailOwner(userId: string, userEmailId: string) {
     const owner = await this.data.email.findUnique({ where: { id: userEmailId } }).owner()
+    console.log({'params': [userId,userEmailId]});
+    console.log({'owner':owner});
+    console.log({'userId':userId});
     if (owner.id !== userId) {
       throw new UnauthorizedException()
     }
